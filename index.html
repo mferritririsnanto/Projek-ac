@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulasi Interaktif Hukum Induksi Diri pada Kumparan</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><h1>SIMULASI INTERAKTIF HUKUM INDUKSI DIRI PADA KUMPARAN</h1><button id="theme" title="Ganti tema terang/gelap">◐ Tema</button></header>
+<nav id="tabs" role="tablist" aria-label="Bagian aplikasi">
+<button role="tab" data-t="sim" class="on">Simulasi</button><button role="tab" data-t="teori">Teori</button><button role="tab" data-t="rumus">Rumus</button><button role="tab" data-t="grafik">Grafik</button><button role="tab" data-t="eksp">Eksperimen</button><button role="tab" data-t="kuis">Kuis</button><button role="tab" data-t="about">Tentang</button></nav>
+<main>
+<section id="sim" class="tab on">
+<div class="card">
+<svg id="svg" viewBox="0 0 700 340" role="img" aria-label="Rangkaian seri sumber, sakelar, resistor, dan kumparan">
+<g id="field" fill="none" stroke="#7c4dff" stroke-width="2" stroke-dasharray="10 8"><ellipse cx="560" cy="175" rx="48" ry="105"/><ellipse cx="560" cy="175" rx="82" ry="125"/><ellipse cx="560" cy="175" rx="112" ry="145"/></g>
+<g fill="none" stroke="var(--fg)" stroke-width="3"><path id="w" d="M70 110V40H150M220 40H300M400 40H560V100M560 250V270H235M165 270H70V190"/>
+<path d="M300 40l8-12 14 24 14-24 14 24 14-24 14 24 8-12" id="res"/><path d="M440 169V100H545M440 201V250H545" stroke-width="1.5"/></g>
+<path class="flow" d="M70 110V40H150M220 40H560V100M560 250V270H70V190" fill="none" stroke="#ff9100" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 16"/>
+<rect id="core" x="548" y="98" width="24" height="154" fill="#9e9e9e" opacity="0"/>
+<g id="coil" fill="none" stroke="#b36b00" stroke-width="4"></g>
+<line id="blade" x1="150" y1="40" x2="220" y2="40" stroke="var(--fg)" stroke-width="4"/><circle cx="150" cy="40" r="4" fill="var(--fg)"/><circle cx="220" cy="40" r="4" fill="var(--fg)"/>
+<g id="srcdc" stroke="var(--fg)" stroke-width="3"><line x1="50" y1="125" x2="90" y2="125"/><line x1="58" y1="140" x2="82" y2="140" stroke-width="6"/><line x1="50" y1="155" x2="90" y2="155"/><line x1="58" y1="170" x2="82" y2="170" stroke-width="6"/></g>
+<g id="srcac" fill="none" stroke="var(--fg)" stroke-width="3" display="none"><circle cx="70" cy="150" r="30"/><path d="M52 150q9-18 18 0t18 0"/></g>
+<g fill="var(--fg)" font-size="13"><text x="285" y="85">R</text><text x="80" y="206" font-size="12">sumber</text><text x="150" y="25">sakelar</text>
+<text x="470" y="30">ε = −L di/dt</text></g>
+<g stroke="var(--fg)" fill="var(--card)" stroke-width="2.5"><circle cx="200" cy="270" r="18"/><circle cx="440" cy="185" r="18"/></g>
+<g fill="var(--fg)" font-size="14" font-weight="bold" text-anchor="middle"><text x="200" y="275">A</text><text x="440" y="190">V</text><text id="amm" x="200" y="305" font-size="12" font-weight="normal"></text><text id="vol" x="440" y="225" font-size="12" font-weight="normal"></text><text id="pp" x="590" y="112" fill="#d50000" font-size="18"></text><text id="pm" x="590" y="258" fill="#0057d9" font-size="18"></text></g>
+<text id="emfarrow" x="605" y="185" font-size="30" fill="#d50000">↑</text>
+</svg>
+<p id="emf" class="badge" aria-live="polite"></p>
+<p class="note">Medan magnet bersifat skematis: tidak menggambarkan distribusi kuantitatif. Di dalam solenoida ideal panjang medan hampir seragam sejajar sumbu; di luar medan jauh lebih lemah dan bentuk garisnya tidak lingkaran sempurna. Panah ↑/↓ = arah polaritas GGL induksi ε (menentang perubahan arus).</p>
+<div class="btns"><button id="b-start">▶ Mulai</button><button id="b-pause">⏸ Jeda</button><button id="b-resume">⏯ Lanjutkan</button><button id="b-reset">↺ Reset</button>
+<button id="b-sw" aria-pressed="false">Sakelar: OFF</button><button id="b-mode">Mode: DC</button><button id="b-field" aria-pressed="true">Medan: tampil</button><button id="b-graph" aria-pressed="true">Grafik: tampil</button></div>
+<p id="status" role="status" aria-live="polite" class="note"></p></div>
+<div class="grid2"><div class="card"><h2>Panel Kontrol</h2><p id="msg" class="warn" role="alert"></p>
+<label>Model induktansi <select id="lm"><option value="direct">L diatur langsung (slider L)</option><option value="sol">Hitung dari solenoida: L = μ₀μrN²A/ℓ</option></select></label>
+<label>Inti <select id="core-sel"><option value="1">Inti udara (μr = 1)</option><option value="1000">Inti besi lunak (μr ≈ 1000)</option></select></label>
+<label>Kecepatan animasi <select id="speed"><option value="0.25">0,25×</option><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+<div id="controls"></div><p class="note">Catatan: N, A, ℓ, μr hanya memengaruhi L pada model solenoida; pada model langsung, L dari slider dipakai (tidak dihitung ganda).</p></div>
+<div class="card"><h2>Hasil Perhitungan</h2><dl id="res-list"></dl></div></div>
+<div class="card" id="gbox"><h2>Grafik Waktu Nyata</h2><div class="grid2"><canvas id="c1"></canvas><canvas id="c2"></canvas></div></div>
+</section>
+<section id="teori" class="tab card"></section>
+<section id="rumus" class="tab card"></section>
+<section id="grafik" class="tab card"><h2>Grafik</h2><p class="note">Arahkan kursor/sentuh grafik untuk membaca nilai. Jeda dengan tombol di tab Simulasi.</p><canvas id="g1"></canvas><canvas id="g2"></canvas><canvas id="g3"></canvas><canvas id="g4"></canvas></section>
+<section id="eksp" class="tab card"></section>
+<section id="kuis" class="tab card"></section>
+<section id="about" class="tab card"><h2>Tentang Simulasi</h2><p>Simulasi pendidikan mandiri (terinspirasi gaya simulasi interaktif, bukan salinan PhET). Model: rangkaian seri RL ideal dengan sumber DC atau AC. Setiap langkah waktu memakai solusi eksak persamaan L·di/dt + Ri = v(t), sehingga stabil untuk semua nilai parameter. Pada saat sakelar OFF diasumsikan ada jalur pelepasan melalui R (sumber dilepas), sehingga arus meluruh i = I₀e<sup>−t/τ</sup>, bukan langsung nol.</p><p>Batasan: induktor linear ideal (tanpa saturasi, tanpa resistansi lilitan, tanpa kapasitansi parasit); tidak ada kapasitor (bukan rangkaian RLC).</p></section>
+</main>
+<script src="script.js"></script></body></html>
